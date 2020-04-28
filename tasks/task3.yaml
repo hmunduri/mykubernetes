@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: 1stnode
+  labels:
+    app: store
+spec:
+  containers:
+  - name: 1stnode
+    image: nginx
+    imagePullPolicy: IfNotPresent
