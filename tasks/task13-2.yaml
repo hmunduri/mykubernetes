@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ext-load
+spec:
+  selector:
+    app: ext-load
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: kasun
+  type: LoadBalancer
