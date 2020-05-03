@@ -2,3 +2,18 @@
 
 #List the nodes taints
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints --no-headers
+
+
+#
+kubectl run nginx image=nginx  --port=80  --record
+kubectl set image deployment nginx nginx=nginx:1.13.8
+kubectl rollout history deployment nginx
+kubectl rollout status deployment nginx
+kubectl rollout undo deployment nginx  --to-revision=2 
+
+
+# token generate to add the node
+
+kubeadm token list
+kubeadm token create --print-join-command
+
