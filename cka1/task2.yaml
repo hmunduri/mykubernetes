@@ -1,0 +1,5 @@
+Q. Use Json Path
+List all the nodes and find the nodes which don't have Noschedule taint on it.
+Store the output in file.
+
+kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
