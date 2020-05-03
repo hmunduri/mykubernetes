@@ -1,0 +1,10 @@
+Q. Create a deployment running nginx version 1.12.2 that will run in 2 pods
+Scale this to 4 pods.
+Scale it back to 2 pods.
+Upgrade nginx version to 1.13.8
+Check the status of the upgrade
+How do you do this in a way that you can see history of what happened?
+Undo the upgrade
+
+
+
