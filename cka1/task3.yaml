@@ -1,10 +1,40 @@
-Q. Create a deployment running nginx version 1.12.2 that will run in 2 pods
-Scale this to 4 pods.
-Scale it back to 2 pods.
-Upgrade nginx version to 1.13.8
-Check the status of the upgrade
-How do you do this in a way that you can see history of what happened?
-Undo the upgrade
+#Q. Create a deployment running nginx version 1.12.2 that will run in 2 pods
+#Scale this to 4 pods.
+#Scale it back to 2 pods.
+#Upgrade nginx version to 1.13.8
+#Check the status of the upgrade
+#How do you do this in a way that you can see history of what happened?
+#Undo the upgrade
+
+
+### Answer ###
+
+# kubectl create -f task3.yaml --record
+# kubectl scale deployment --replicas=4 nginx-deployment
+# kubectl set image deployment nginx-deployment nginx=nginx:1.13.8
+# kubectl rollout history deployment nginx-deployment
+# kubectl rollout status deployment nginx-deployment
+# kubectl rollout undo deployment nginx  --to-revision=1 
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.12.2
+        ports:
+        - containerPort: 80
 
 
 
