@@ -1,0 +1,13 @@
+#Q. Create a pod that uses secrets
+#Pull secrets from environment variables.
+#Pull secrets from a volume.
+#Dump the secrets out via kubectl to show it worked.
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: MWYyZDFlMmU2N2Rm

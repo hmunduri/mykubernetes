@@ -1,0 +1,14 @@
+#Q. Create a service
+#Create a service that uses an external load balancer and points to a 3 pod cluster running nginx
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+    - port: 80
+      targetPort: 80
+   
+  type: LoadBalancer

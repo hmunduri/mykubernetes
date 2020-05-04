@@ -1,0 +1,22 @@
+#Q. Create a scheduled Job
+#Create a job that runs every 3 minutes and prints out the current time.
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date;
+          restartPolicy: OnFailure
+
+

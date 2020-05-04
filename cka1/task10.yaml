@@ -1,0 +1,16 @@
+#Q. Create a parallel Job
+#Create a job that runs 80 times, with 5 containers at a time, and prints "Hello parallel world".
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  completions: 80
+  parallelism: 5
+  template:
+    spec:
+      containers:
+      - name: parallel
+        image: perl
+        command: ["echo",  "Hello parallel world"]
+      restartPolicy: Never
