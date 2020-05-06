@@ -1,0 +1,21 @@
+#Q. Create pods with restricted resource usage
+#Create 2 pods that has a CPU limit of 2 and should request 0.5 CPU when started.
+#Limit the memory usage for one of the pod to 100Mb.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-priority
+spec:
+  containers:
+  - name: high-priority
+    image: ubuntu
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do echo hello; sleep 10;done"]
+    resources:
+      requests:
+        memory: "10Gi"
+        cpu: "500m"
+      limits:
+        memory: "10Gi"
+        cpu: "500m"
+  priorityClassName: high

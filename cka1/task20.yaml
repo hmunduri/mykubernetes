@@ -1,0 +1,27 @@
+#Q. Create a networking policy such that only pods with the label access=granted can talk to it
+#Create an nginx pod and attach this policy to it.
+#Create a busybox pod and attempt to talk to nginx - should be blocked.
+#NAttach the label to busybox and try again - should be allowed.
+
+#kubectl create deployment nginx --image=nginx
+
+#kubectl expose deployment nginx --port=80
+
+# kubectl get svc,pod
+
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: access-nginx
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          access: "true"
+
+

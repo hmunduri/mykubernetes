@@ -1,0 +1,28 @@
+#Q. Write a service that exposes nginx on a nodeport
+#Change it to use a cluster port.
+#Scale the service.
+#Change it to use an external IP.
+#Change it to use a load balancer.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  selector:
+    matchLabels:
+      run: load-balancer-example
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: load-balancer-example
+    spec:
+      containers:
+        - name: hello-world
+          image: gcr.io/google-samples/node-hello:1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+
+
+# kubectl expose deployment hello-world --type=NodePort --name=example-service

@@ -1,0 +1,41 @@
+#Q. Create a namespace
+#Run a pod in the new namespace.
+#Put memory limits on the namespace.
+#Limit pods to 2 persistent volumes in this namespace.
+
+#kubectl create namespace default-mem-example
+
+#kubectl apply -f https://k8s.io/examples/admin/resource/memory-defaults.yaml --namespace=default-mem-example
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: default-mem-demo
+spec:
+  containers:
+  - name: default-mem-demo-ctr
+    image: nginx
+
+
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: storagelimits
+spec:
+  limits:
+  - type: PersistentVolumeClaim
+    max:
+      storage: 2Gi
+    min:
+      storage: 1Gi
+
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: storagequota
+spec:
+  hard:
+    persistentvolumeclaims: "2"
+    requests.storage: "5Gi"

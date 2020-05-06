@@ -1,0 +1,3 @@
+#Q. Find out when is the CA certificates going to expire for kube-apiserver.
+#Also get the common name and issuer of the same certificate
+# kubeadm alpha certs check-expiration

@@ -1,0 +1,32 @@
+#Create an init container
+#Create a nginx pod with an init container which uses busybox image and that creates a empty file secret.txt
+#That secret.txt file should be accessible from nginx container also
+#Make sure pod is in running state
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: workdir
+      mountPath: /usr/share/nginx/html
+  # These containers are run during pod initialization
+  initContainers:
+  - name: install
+    image: busybox
+    command:
+    - "touch"
+    - "/work-dir/secret.txt"
+    volumeMounts:
+    - name: workdir
+      mountPath: "/work-dir"
+  dnsPolicy: Default
+  volumes:
+  - name: workdir
+    emptyDir: {}
