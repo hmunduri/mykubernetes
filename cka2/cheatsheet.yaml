@@ -1,0 +1,3 @@
+kubectl create quota myrq --hard=cpu=1,memory=1G,pods=2 --dry-run -o yaml 
+kubectl run nginx --restart=Never --image=nginx --env=var1=val1 -it --rm -- env
+

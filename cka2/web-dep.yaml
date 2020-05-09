@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2020-05-08T04:03:01Z"
+  generation: 1
+  labels:
+    tier: frontend
+  name: web-dep
+  namespace: default
+  resourceVersion: "245642"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/web-dep
+  uid: 56b5c1df-95b5-42d3-9693-40807b94f94f
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      tier: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: web-dep
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}

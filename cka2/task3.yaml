@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: haz-docs
+spec:
+  containers:
+  - name: haz-docs
+    image: nginx
+    volumeMounts:
+    - name: haz-storage
+      mountPath: /tmp
+  volumes:
+  - name: haz-storage
+    emptyDir: {}
